@@ -38,7 +38,7 @@ onDeviceReady: function() {
 ###Config examples
 ######*default options*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-1.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-1.png)
 
 ```
 CanvasGamepad.setup();
@@ -46,7 +46,7 @@ CanvasGamepad.setup();
 
 ######*one button, custom name, no start button*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-2.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-2.png)
 
 ```
 CanvasGamepad.setup({
@@ -59,7 +59,7 @@ CanvasGamepad.setup({
 
 ######*two buttons, custom names, custom colors, with select button*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-3.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-3.png)
 
 ```
 CanvasGamepad.setup({
@@ -73,7 +73,7 @@ CanvasGamepad.setup({
 
 ######*target canvas*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-4.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-4.png)
 
 ```
 CanvasGamepad.setup({
@@ -83,7 +83,7 @@ CanvasGamepad.setup({
 
 ######*change layout canvas*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-5.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-5.png)
 
 ```
 CanvasGamepad.setup({
@@ -94,7 +94,7 @@ CanvasGamepad.setup({
 ######*show trace & debug info*
 
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-6.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-6.png)
 
 ```
 CanvasGamepad.setup({
@@ -106,7 +106,7 @@ CanvasGamepad.setup({
 ######*all out everything*
 
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-7.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-7.png)
 
 ```
 CanvasGamepad.setup({
@@ -124,7 +124,7 @@ CanvasGamepad.setup({
 
 ######*hidden gamepad*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-8.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-8.png)
 
 ```
 CanvasGamepad.setup({
@@ -134,7 +134,7 @@ CanvasGamepad.setup({
 
 ######*real world example*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CanvasGamepad-9.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-9.png)
 
 ```
 onDeviceReady: function() {
