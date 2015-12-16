@@ -11,6 +11,49 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <style> 
+        @font-face{ 
+          font-family: "bit"; 
+          src: url("game/css/8bit.ttf"); 
+      }    
+      * {
+        padding: 0;
+        margin: 0;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none; /* Disable selection/copy in UIWebView */          
+      }            
+      html
+      {
+          -ms-touch-action: manipulation;
+          touch-action: manipulation;
+      }
+      body
+      {
+          width:  100%;
+          height: 100%;
+          margin: 0px;  
+          padding:0px; 
+          touch-action: none;
+          -ms-touch-action: none;
+          overflow:hidden;
+          font-family: "bit";
+      }
+      canvas
+      {
+          width:568px;
+          height:568px;
+          image-rendering: optimizeSpeed;
+          image-rendering: -moz-crisp-edges;
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: -o-crisp-edges;
+          image-rendering: crisp-edges;
+          -ms-interpolation-mode: nearest-neighbor;
+           touch-action-delay: none;
+          touch-action: none;
+          -ms-touch-action: none;
+      }
+  </style>    
   </head>
   <body>
     <div class="wrapper">
@@ -26,6 +69,8 @@
           <li><a href="https://github.com/32teeth/html5-plugin-canvas-gamepad/tarball/master">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/32teeth/html5-plugin-canvas-gamepad">View On <strong>GitHub</strong></a></li>
         </ul>
+
+        <canvas id="game"></canvas>
       </header>
       <section>
         <h1>
@@ -285,5 +330,28 @@ function draw()
             } catch(err) {}
           </script>
 
+
+        <script src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/example/game/js/game.js"></script>
+        <script src="https://raw.githubusercontent.com/32teeth/multikey.js/master/js/multikey.js"></script>
+        <script src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/CanvasGamepad.js"></script>
+    <script>
+      CanvasGamepad.setup(
+        {
+          canvas:"controller",
+          start:{name:"start", key:"b"},
+          select:{name:"select", key:"v"},
+          trace:true,
+          debug:true,
+          hint:true,
+          buttons:[
+            {name:"a", "key":"s"},
+            {name:"b", "key":"a"},
+            {name:"x", "key":"w"},
+            {name:"y", "key":"q"}
+          ]      
+        }
+      );
+      multikey.setup(CanvasGamepad.events, "qwasbv", true);
+    </script>        
   </body>
 </html>
