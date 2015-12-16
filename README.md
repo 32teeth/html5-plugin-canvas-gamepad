@@ -35,7 +35,7 @@ onDeviceReady: function() {
 |joystick|boolean|true\|false|display joystick/dpad<br>*default is false*|```debug:false```|
 |hidden|boolean|true\|false|show or hide the gamepad<br>*default is false*|<br>this can be used to *hide* the gamepad if you are doing something else on screen|```hidden:false```|
 
-***if you are using [multikey.js](https://github.com/32teeth/multikey.js) to extend the CanvasGamepad for keyboard access***
+***if you are using [multikey.js](http://multikey.32teeth.org/) to extend the CanvasGamepad for keyboard access***
 
 | property | type | value(s) | description | example |
 |-:|:-|:-|:-|:-|
@@ -162,7 +162,7 @@ CanvasGamepad.setup({
 });  
 ```
 
-######*example using key binding with [multikey.js](https://github.com/32teeth/multikey.js)*
+######*example using key binding with [multikey.js](http://multikey.32teeth.org/)*
 
 ![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-10.png)
 
@@ -185,6 +185,7 @@ CanvasGamepad.setup(
 );
 multikey.setup(CanvasGamepad.events, "qwasbv", true);
 ```
+the above code is running in [this example](https://github.com/32teeth/html5-plugin-canvas-gamepad/tree/master/example)
 
 ###CanvasGamepad observable method
 ---
