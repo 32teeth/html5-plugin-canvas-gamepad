@@ -61,6 +61,11 @@ var CanvasGamepad = (function(){
   */
   var ready = false; 
 
+  /*
+  ** @param hint {boolean}
+  */
+  var hint = false;   
+
 	/*
 	** @param debug {boolean}																					
 	*/																																
@@ -194,6 +199,7 @@ var CanvasGamepad = (function(){
 					case "select":
 					case "hidden":
 					case "joystick":
+					case "hint":
 						switch(typeof config[prop])
 						{
 							case "string":
@@ -203,19 +209,30 @@ var CanvasGamepad = (function(){
 							case "number":
 								eval(prop + "=" + config[prop]);
 							break;
+							case "object":
+								switch(prop)
+								{
+									case "start":
+									case "select":
+										eval(prop + "=" + true);
+										eval(prop + "_button.key=\"" + config[prop].key + "\"");
+									break;
+								}
+							break;							
 						}
 					break;
 					case "buttons":
 						buttons = config[prop].length - 1;
 						if(config[prop].length > buttons_layout.length){buttons = buttons_layout.length-1}
 						buttons_layout = buttons_layout[buttons];
-							for(var n = 0; n < buttons + 1; n++)
-							{
-								var button = config[prop][n];
-								if(button.name){buttons_layout[n].name = button.name;};
-								if(button.color){buttons_layout[n].color = button.color;};
-								buttons_layout_built = true;
-							}	
+						for(var n = 0; n < buttons + 1; n++)
+						{
+							var button = config[prop][n];
+							if(button.name){buttons_layout[n].name = button.name;};
+							if(button.color){buttons_layout[n].color = button.color;};
+							if(button.key){buttons_layout[n].key = button.key;};
+							buttons_layout_built = true;
+						}	
 					break;
 				}
 			}
@@ -435,7 +452,20 @@ var CanvasGamepad = (function(){
 						ctx.textBaseline = "middle";
 						ctx.font = bit.button;													
 						ctx.fillText(button.name, x+w/2, y+(h*2));							
-					}				
+					}	
+
+					if(button.key && hint)		
+					{
+						ctx.fillStyle = "rgba(0,0,0,0.25)";
+						ctx.textAlign = "center";
+						ctx.textBaseline = "middle";
+						ctx.font = bit.button;		
+						if(button.name == "start" || button.name == "select")	
+						{
+							x += w/2
+						}										
+						ctx.fillText(button.key, x, y-(r*1.5));							
+					}						
 				}
 			},
 			state:function(id, n, type)
@@ -457,7 +487,7 @@ var CanvasGamepad = (function(){
  						dist = parseInt(Math.sqrt(dx*dx + dy*dy));
  					}
  					else
- 					{
+ 					{	
 						if(touch.x > button.hit.x[0] && touch.x < button.hit.x[1] && touch.y > button.hit.y[0] && touch.y < button.hit.y[1])
 						{
 							dist = 0;
@@ -626,93 +656,200 @@ var CanvasGamepad = (function(){
 		},
 		listen:function(e)
 		{
-			var type = e.type;
-			if(e.type.indexOf("mouse") != -1)
+			if(e.type)
 			{
-				e.identifier = "desktop";
-				e = {touches:[e]}
-			}			
-			for(var n = 0; n < (e.touches.length > 5 ? 5 : e.touches.length); n++)
-			{
-				var id = e.touches[n].identifier;
-				if(!touches[id])
+				var type = e.type;
+				if(e.type.indexOf("mouse") != -1)
 				{
-					touches[id] = {
-						x:e.touches[n].pageX,
-						y:e.touches[n].pageY
-					}	
-				}	
-				else
-				{
-					touches[id].x = e.touches[n].pageX;
-					touches[id].y = e.touches[n].pageY;
-				}
-			}
-
-			/*
-			**
-			*/
-			for(var id in touches)
-			{
-				switch(type)
-				{
-					case "touchstart":
-					case "touchmove":
-						controller.stick.state(id);
-						for(var n = 0; n < buttons_layout.length; n++)
-						{
-							controller.buttons.state(id, n);
-						}					
-					break;
-					case "mousedown":
-					case "mousemove":
-					case "mouseup":
-						controller.stick.state(id, type);
-						for(var n = 0; n < buttons_layout.length; n++)
-						{
-							controller.buttons.state(id, n, type);
-						}
-					break;
+					e.identifier = "desktop";
+					e = {touches:[e]}
 				}			
-			}
-
-			/*
-			** @description remove touchend from touches
-			*/
-			if(e.type == "touchend")
-			{
-				var id = e.changedTouches[0].identifier;
-				if(touches[id].id == "stick"){controller.stick.reset();}	
-				for(var n = 0; n < buttons_layout.length; n++)
+				for(var n = 0; n < (e.touches.length > 5 ? 5 : e.touches.length); n++)
 				{
-					if(touches[id].id == buttons_layout[n].name)
+					var id = e.touches[n].identifier;
+					if(!touches[id])
 					{
-						controller.buttons.reset(n);
+						touches[id] = {
+							x:e.touches[n].pageX,
+							y:e.touches[n].pageY
+						}	
+					}	
+					else
+					{
+						touches[id].x = e.touches[n].pageX;
+						touches[id].y = e.touches[n].pageY;
 					}
 				}
-				if(touches[id]){delete touches[id];}
 
-				if(e.changedTouches.length > e.touches.length)
+				/*
+				**
+				*/
+				for(var id in touches)
 				{
-					var length = 0;
-					var delta = e.changedTouches.length - e.touches.length;
-					for(var id in touches)
+					switch(type)
 					{
-						if(length >= delta){delete touches[id];};
-						length++;
-					}
+						case "touchstart":
+						case "touchmove":
+							controller.stick.state(id);
+							for(var n = 0; n < buttons_layout.length; n++)
+							{
+								controller.buttons.state(id, n);
+							}					
+						break;
+						case "mousedown":
+						case "mousemove":
+						case "mouseup":
+							controller.stick.state(id, type);
+							for(var n = 0; n < buttons_layout.length; n++)
+							{
+								controller.buttons.state(id, n, type);
+							}
+						break;
+					}			
 				}
-				if(e.touches.length == 0)
+
+				/*
+				** @description remove touchend from touches
+				*/
+				if(e.type == "touchend")
 				{
-					touches = {};
+					var id = e.changedTouches[0].identifier;
+					if(touches[id].id == "stick"){controller.stick.reset();}	
 					for(var n = 0; n < buttons_layout.length; n++)
 					{
-						controller.buttons.reset(n);
+						if(touches[id].id == buttons_layout[n].name)
+						{
+							controller.buttons.reset(n);
+						}
 					}
-					controller.stick.reset();
-				}
-			}			
-					
+					if(touches[id]){delete touches[id];}
+
+					if(e.changedTouches.length > e.touches.length)
+					{
+						var length = 0;
+						var delta = e.changedTouches.length - e.touches.length;
+						for(var id in touches)
+						{
+							if(length >= delta){delete touches[id];};
+							length++;
+						}
+					}
+					if(e.touches.length == 0)
+					{
+						touches = {};
+						for(var n = 0; n < buttons_layout.length; n++)
+						{
+							controller.buttons.reset(n);
+						}
+						controller.stick.reset();
+					}
+				}			
+			}
+			else
+			{
+	      var keys = e;
+	      var dir = 0;
+				for(var prop in keys)
+				{
+	        switch(prop)
+	        {
+	          case "%"://left
+	            if(keys[prop]){dir+=1;}
+	          break;
+	          case "&"://up
+	            if(keys[prop]){dir+=2;}
+	          break;  
+	          case "'"://right
+	            if(keys[prop]){dir+=4;}
+	          break; 
+	          case "("://down
+	            if(keys[prop]){dir+=8;}
+	          break; 
+	          default:
+	            if(keys[prop])
+              {             	
+                for(var n = 0; n < buttons_layout.length; n++)
+                {
+                	if(buttons_layout[n].key)
+                	{
+                		if(buttons_layout[n].key == prop)
+                		{
+											touches[buttons_layout[n].name] = {id:buttons_layout[n].name, x:buttons_layout[n]["hit"].x[0] + buttons_layout[n].w/2 , y:buttons_layout[n]["hit"].y[0] + buttons_layout[n].h/2};                			
+                			controller.buttons.state(buttons_layout[n].name, n, "mousedown")
+                		}
+                	}
+                }
+              }
+              else
+              {
+              	if(!keys[prop])
+              	{
+              		for(var n = 0; n < buttons_layout.length; n++)
+              		{
+										if(buttons_layout[n].key)
+	                	{
+	                		if(buttons_layout[n].key == prop)
+	                		{
+	                			controller.buttons.reset(n)
+	                			delete touches[buttons_layout[n].name];
+	                		}
+	                	}       
+              		}       		
+              		delete keys[prop];
+              	}               
+              }        
+	          break;        
+	        }
+					controller.stick.dx = controller.stick.x;
+	        controller.stick.dy = controller.stick.y; 	        
+					switch(dir)
+	        {
+	          case 1://left
+	            controller.stick.dx = controller.stick.x-controller.stick.radius/2;
+	          break;
+	          case 2://up
+	            controller.stick.dy = controller.stick.y-controller.stick.radius/2;            
+	          break;
+	          case 3://left up
+	            controller.stick.dx = controller.stick.x-controller.stick.radius/2;
+	            controller.stick.dy = controller.stick.y-controller.stick.radius/2;
+	          break;
+	          case 4://right
+	            controller.stick.dx = controller.stick.x+controller.stick.radius/2;
+	          break;
+	          case 6://right up
+	            controller.stick.dx = controller.stick.x+controller.stick.radius/2;
+	            controller.stick.dy = controller.stick.y-controller.stick.radius/2;
+	          break;
+	          case 8://down
+	            controller.stick.dy = controller.stick.y+controller.stick.radius/2;
+	          break;
+	          case 9://left down
+	            controller.stick.dx = controller.stick.x-controller.stick.radius/2;
+	            controller.stick.dy = controller.stick.y+controller.stick.radius/2;
+	          break;
+	          case 12://right down
+	            controller.stick.dx = controller.stick.x+controller.stick.radius/2;
+	            controller.stick.dy = controller.stick.y+controller.stick.radius/2;
+	          break; 
+	          default:
+	            controller.stick.dx = controller.stick.x;
+	            controller.stick.dy = controller.stick.y;      
+	          break;            
+	        }	
+	        if(dir != 0)
+	        {
+						touches["stick"] = {id:"stick"};	        
+		        controller.stick.state("stick", "mousemove");	        
+	        }
+	        else
+	        {
+	        	controller.stick.reset();
+						delete touches["stick"]; 
+	        }
+				}      				
+			}
+
 			return events.broadcast();
 		},
 		broadcast:function()
@@ -850,7 +987,6 @@ var CanvasGamepad = (function(){
     toggle = toggle ? false : true;
     if(toggle)
     {
-    	console.log(this)
       requestAnimationFrame(loop);
       return;
     }
@@ -878,8 +1014,3 @@ var CanvasGamepad = (function(){
 		observe:function(){return events.observe();}
   };
 })();
-
-/*
-** @description this is for debugging in the browser
-*/
-module.exports = CanvasGamepad;

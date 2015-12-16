@@ -31,14 +31,22 @@ onDeviceReady: function() {
 |button|object|{name:string,color:hex\|rgb\|rgba}|properties for custom buttons|```[{name:"x",color:"rgba(255,255,0,0.5)"},{name:"y",color:"rgba(255,0,255,0.5)"}]```|
 |layout|string|TOP_LEFT \| TOP_RIGHT \| BOTTOM_LEFT \| BOTTOM_RIGHT|cardinal position of buttons<br>*default is **BOTTOM_RIGHT***|```layout:"BOTTOM_RIGHT"```|
 |start|boolean|true\|false|display start button<br>*default is true*|```start:false```|
-|select|boolean|true\|false|display select button<br>*default is false*||```select:false```|
+|select|boolean|true\|false|display select button<br>*default is false*|```select:false```|
 |joystick|boolean|true\|false|display joystick/dpad<br>*default is false*|```debug:false```|
 |hidden|boolean|true\|false|show or hide the gamepad<br>*default is false*|<br>this can be used to *hide* the gamepad if you are doing something else on screen|```hidden:false```|
+
+***if you are using [multikey.js](https://github.com/32teeth/multikey.js) to extend the CanvasGamepad for keyboard access***
+
+| property | type | value(s) | description | example |
+|-:|:-|:-|:-|:-|
+|buttons|array|[]|collection of button objects|```[{name:"x",color:"rgba(255,255,0,0.5)", key:"[keyboard letter]"}]```|
+|button|object|{name:string,color:hex\|rgb\|rgba}|properties for custom buttons|```[{name:"x",color:"rgba(255,255,0,0.5)", key:"w"},{name:"y",color:"rgba(255,0,255,0.5)", key:"q"}]```|
+|hint|boolean|true\|false|show or hidekeyboard hint<br>*default is false*|```hint:true```|
 
 ###Config examples
 ######*default options*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-1.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-1.png)
 
 ```
 CanvasGamepad.setup();
@@ -46,7 +54,7 @@ CanvasGamepad.setup();
 
 ######*one button, custom name, no start button*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-2.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-2.png)
 
 ```
 CanvasGamepad.setup({
@@ -59,7 +67,7 @@ CanvasGamepad.setup({
 
 ######*two buttons, custom names, custom colors, with select button*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-3.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-3.png)
 
 ```
 CanvasGamepad.setup({
@@ -73,7 +81,7 @@ CanvasGamepad.setup({
 
 ######*target canvas*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-4.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-4.png)
 
 ```
 CanvasGamepad.setup({
@@ -83,7 +91,7 @@ CanvasGamepad.setup({
 
 ######*change layout canvas*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-5.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-5.png)
 
 ```
 CanvasGamepad.setup({
@@ -94,7 +102,7 @@ CanvasGamepad.setup({
 ######*show trace & debug info*
 
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-6.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-6.png)
 
 ```
 CanvasGamepad.setup({
@@ -106,7 +114,7 @@ CanvasGamepad.setup({
 ######*all out everything*
 
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-7.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-7.png)
 
 ```
 CanvasGamepad.setup({
@@ -124,7 +132,7 @@ CanvasGamepad.setup({
 
 ######*hidden gamepad*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-8.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-8.png)
 
 ```
 CanvasGamepad.setup({
@@ -134,26 +142,48 @@ CanvasGamepad.setup({
 
 ######*real world example*
 
-![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-gamepad/master/images/CDVGamepad-9.png)
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-9.png)
 
 ```
-onDeviceReady: function() {
-		/*
-		** @description start the game
-		*/
-    game.init();
-		/*
-		** @description setup gamepad, no stick, no start, one button
-		*/    
-    CanvasGamepad.setup({
-    	canvas:"controller",
-    	joystick:false,
-    	start:false, 
-    	buttons:[
-    		{name:"jump", color:"rgba(0,0,0,0.25)"}
-    	]
-    });    
-}
+/*
+** @description start the game
+*/
+game.init();
+/*
+** @description setup gamepad, no stick, no start, one button
+*/    
+CanvasGamepad.setup({
+	canvas:"controller",
+	joystick:false,
+	start:false, 
+	buttons:[
+		{name:"jump", color:"rgba(0,0,0,0.25)"}
+	]
+});  
+```
+
+######*example using key binding with [multikey.js](https://github.com/32teeth/multikey.js)*
+
+![default options](https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-10.png)
+
+```
+CanvasGamepad.setup(
+  {
+    canvas:"controller",
+    start:{name:"start", key:"b"},
+    select:{name:"select", key:"v"},
+    trace:true,
+    debug:true,
+    hint:true,
+    buttons:[
+      {name:"a", "key":"s"},
+      {name:"b", "key":"a"},
+      {name:"x", "key":"w"},
+      {name:"y", "key":"q"}
+    ]      
+  }
+);
+multikey.setup(CanvasGamepad.events, "qwasbv", true);
 ```
 
 ###CanvasGamepad observable method
