@@ -1,0 +1,46 @@
+{
+  "name": "html5-plugin-canvas-gamepad",
+  "version": "0.1.1",
+  "description": "html5 Canvas Gamepad Plugin",
+  "html5": {
+    "id": "html5-plugin-canvas-gamepad",
+    "platforms": [
+      "firefoxos",
+      "tizen",
+      "android",
+      "amazon-fireos",
+      "ubuntu",
+      "ios",
+      "blackberry10",
+      "wp7",
+      "wp8",
+      "windows8",
+      "windows",
+      "browser"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/32teeth/html5-plugin-canvas-gamepad"
+  },
+  "keywords": [
+    "html5",
+    "gamepad",
+    "canvas",
+    "ecosystem:html5",
+    "html5-firefoxos",
+    "html5-tizen",
+    "html5-android",
+    "html5-amazon-fireos",
+    "html5-ubuntu",
+    "html5-ios",
+    "html5-blackberry10",
+    "html5-wp7",
+    "html5-wp8",
+    "html5-windows8",
+    "html5-windows",
+    "html5-browser"
+  ],
+  "author": "eugene andruszczenko <eugene.andruszczenko@gmail.com> (http://32teeth.org)",
+  "license": "Apache 2.0"
+}
