@@ -1,17 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>html5-plugin-canvas-gamepad by 32teeth</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>Super Angry Pixel Gamepad</title>    
     <style> 
         @font-face{ 
           font-family: "bit"; 
@@ -41,8 +34,6 @@
       }
       canvas
       {
-          width:568px;
-          height:568px;
           image-rendering: optimizeSpeed;
           image-rendering: -moz-crisp-edges;
           image-rendering: -webkit-optimize-contrast;
@@ -53,288 +44,14 @@
           touch-action: none;
           -ms-touch-action: none;
       }
-  </style>    
+  </style>     
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>html5-plugin-canvas-gamepad</h1>
-        <p>html5 Canvas Gamepad Plugin</p>
-
-        <p class="view"><a href="https://github.com/32teeth/html5-plugin-canvas-gamepad">View the Project on GitHub <small>32teeth/html5-plugin-canvas-gamepad</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/32teeth/html5-plugin-canvas-gamepad/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/32teeth/html5-plugin-canvas-gamepad/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/32teeth/html5-plugin-canvas-gamepad">View On <strong>GitHub</strong></a></li>
-        </ul>
-
-        <canvas id="game"></canvas>
-      </header>
-      <section>
-        <h1>
-<a id="canvasgamepad" class="anchor" href="#canvasgamepad" aria-hidden="true"><span class="octicon octicon-link"></span></a>CanvasGamepad</h1>
-
-<hr>
-
-<p>So you want to add a gamepad to a html5/canvas based app in <a href="http://html5.apache.org/">html5</a></p>
-
-<p><strong><em>npm i html5-plugin-canvas-gamepad</em></strong></p>
-
-<h3>
-<a id="canvasgamepad-setup-and-configurations" class="anchor" href="#canvasgamepad-setup-and-configurations" aria-hidden="true"><span class="octicon octicon-link"></span></a>CanvasGamepad setup and configurations</h3>
-
-<hr>
-
-<p>in you html file add <em>CanvasGamepad.setup()</em></p>
-
-<pre><code>/*
-** this is a basic joystick and 1 button setup with start and select buttons
-*/
-onDeviceReady: function() {
-    CanvasGamepad.setup();
-}
-</code></pre>
-
-<h2>
-<a id="configuration-options" class="anchor" href="#configuration-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration options</h2>
-
-<p><em>CanvasGamepad is fully customizable, from button names, colors, layout and more.</em></p>
-
-<p>| property | type | value(s) | description | example |
-|-:|:-|:-|:-|:-|
-|debug|boolean|true|false|show or hide event debug info<br><em>default is false</em>|<code>debug:false</code>|
-|trace|boolean|true|false|show or hide gamepad trace info<br><em>default is false</em>|<code>trace:false</code>|
-|canvas|string|id of target canvas|<em>if left out, creates a new canvas object</em>|<code>canvas:"game"</code>|
-|buttons|array|[]|collection of button objects|<code>[{name:"x",color:"rgba(255,255,0,0.5)"}]</code>|
-|button|object|{name:string,color:hex|rgb|rgba}|properties for custom buttons|<code>[{name:"x",color:"rgba(255,255,0,0.5)"},{name:"y",color:"rgba(255,0,255,0.5)"}]</code>|
-|layout|string|TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT|cardinal position of buttons<br><em>default is *</em>BOTTOM_RIGHT**<em>|<code>layout:"BOTTOM_RIGHT"</code>|
-|start|boolean|true|false|display start button<br></em>default is true<em>|<code>start:false</code>|
-|select|boolean|true|false|display select button<br></em>default is false<em>|<code>select:false</code>|
-|joystick|boolean|true|false|display joystick/dpad<br></em>default is false<em>|<code>debug:false</code>|
-|hidden|boolean|true|false|show or hide the gamepad<br></em>default is false<em>|<br>this can be used to *hide</em> the gamepad if you are doing something else on screen|<code>hidden:false</code>|</p>
-
-<p><strong><em>if you are using <a href="http://multikey.32teeth.org/">multikey.js</a> to extend the CanvasGamepad for keyboard access</em></strong></p>
-
-<p>| property | type | value(s) | description | example |
-|-:|:-|:-|:-|:-|
-|buttons|array|[]|collection of button objects|<code>[{name:"x",color:"rgba(255,255,0,0.5)", key:"[keyboard letter]"}]</code>|
-|button|object|{name:string,color:hex|rgb|rgba}|properties for custom buttons|<code>[{name:"x",color:"rgba(255,255,0,0.5)", key:"w"},{name:"y",color:"rgba(255,0,255,0.5)", key:"q"}]</code>|
-|hint|boolean|true|false|show or hidekeyboard hint<br><em>default is false</em>|<code>hint:true</code>|</p>
-
-<h3>
-<a id="config-examples" class="anchor" href="#config-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config examples</h3>
-
-<h6>
-<a id="default-options" class="anchor" href="#default-options" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>default options</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-1.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup();
-</code></pre>
-
-<h6>
-<a id="one-button-custom-name-no-start-button" class="anchor" href="#one-button-custom-name-no-start-button" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>one button, custom name, no start button</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-2.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup({
-    start:false,
-    buttons:[
-        {name:"jump"}
-    ]
-});
-</code></pre>
-
-<h6>
-<a id="two-buttons-custom-names-custom-colors-with-select-button" class="anchor" href="#two-buttons-custom-names-custom-colors-with-select-button" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>two buttons, custom names, custom colors, with select button</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-3.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup({
-    select:true,
-    buttons:[
-        {name:"x",color:"rgba(255,255,0,0.5)"},
-        {name:"y",color:"rgba(0,255,255,0.75)"}
-    ]
-});
-</code></pre>
-
-<h6>
-<a id="target-canvas" class="anchor" href="#target-canvas" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>target canvas</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-4.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup({
-    canvas:"game"
-});
-</code></pre>
-
-<h6>
-<a id="change-layout-canvas" class="anchor" href="#change-layout-canvas" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>change layout canvas</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-5.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup({
-    layout:"BOTTOM_LEFT"
-});
-</code></pre>
-
-<h6>
-<a id="show-trace--debug-info" class="anchor" href="#show-trace--debug-info" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>show trace &amp; debug info</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-6.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup({
-    trace:true,
-    debug:true
-});
-</code></pre>
-
-<h6>
-<a id="all-out-everything" class="anchor" href="#all-out-everything" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>all out everything</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-7.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup({
-    select:true,
-    trace:true,
-    debug:true,
-    canvas:"game",
-    buttons:[
-        {name:"z", color:"#17861c"},
-        {name:"y", color:"rgb(134, 83, 23)"},
-        {name:"x", color:"rgba(204, 0, 51, 0.5)"},      
-    ]
-});
-</code></pre>
-
-<h6>
-<a id="hidden-gamepad" class="anchor" href="#hidden-gamepad" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>hidden gamepad</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-8.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup({
-    hidden:true
-});
-</code></pre>
-
-<h6>
-<a id="real-world-example" class="anchor" href="#real-world-example" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>real world example</em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-9.png" alt="default options"></p>
-
-<pre><code>/*
-** @description start the game
-*/
-game.init();
-/*
-** @description setup gamepad, no stick, no start, one button
-*/    
-CanvasGamepad.setup({
-    canvas:"controller",
-    joystick:false,
-    start:false, 
-    buttons:[
-        {name:"jump", color:"rgba(0,0,0,0.25)"}
-    ]
-});  
-</code></pre>
-
-<h6>
-<a id="example-using-key-binding-with-multikeyjs" class="anchor" href="#example-using-key-binding-with-multikeyjs" aria-hidden="true"><span class="octicon octicon-link"></span></a><em>example using key binding with <a href="http://multikey.32teeth.org/">multikey.js</a></em>
-</h6>
-
-<p><img src="https://raw.githubusercontent.com/32teeth/html5-plugin-canvas-gamepad/master/images/CDVGamepad-10.png" alt="default options"></p>
-
-<pre><code>CanvasGamepad.setup(
-  {
-    canvas:"controller",
-    start:{name:"start", key:"b"},
-    select:{name:"select", key:"v"},
-    trace:true,
-    debug:true,
-    hint:true,
-    buttons:[
-      {name:"a", "key":"s"},
-      {name:"b", "key":"a"},
-      {name:"x", "key":"w"},
-      {name:"y", "key":"q"}
-    ]      
-  }
-);
-multikey.setup(CanvasGamepad.events, "qwasbv", true);
-</code></pre>
-
-<p>the above code is running in <a href="https://github.com/32teeth/html5-plugin-canvas-gamepad/tree/master/example">this example</a></p>
-
-<h3>
-<a id="canvasgamepad-observable-method" class="anchor" href="#canvasgamepad-observable-method" aria-hidden="true"><span class="octicon octicon-link"></span></a>CanvasGamepad observable method</h3>
-
-<hr>
-
-<p>CanvasGamepad has an observable method that returns the current state map of the gamepad</p>
-
-<p><strong>observe();</strong></p>
-
-<pre><code>CanvasGamepad.setup()
-/*
-** @description the below example simply logs out the observe method return
-*/
-setInterval(
-    function()
-    {
-        var map = CanvasGamepad.observe();
-        console.log(new Date() + ":" + JSON.stringify(map))
-    }
-    ,1000
-);
-</code></pre>
-
-<pre><code>/*
-** @description additionally, you can throw it into your main loop in canvas
-*/
-function draw()
-{
-    if(CanvasGamepad)
-    {
-        gamepad(CanvasGamepad.observe())
-    }
-}
-</code></pre>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/32teeth">32teeth</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-1812163-40");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
-        <script src="https://cdn.rawgit.com/32teeth/html5-plugin-canvas-gamepad/master/example/game/js/game.js"></script>
+    <canvas id="game"></canvas>
+<script src="https://cdn.rawgit.com/32teeth/html5-plugin-canvas-gamepad/master/example/game/js/game.js"></script>
         <script src="https://cdn.rawgit.com/32teeth/multikey.js/master/js/multikey.js"></script>
         <script src="https://cdn.rawgit.com/32teeth/html5-plugin-canvas-gamepad/master/CanvasGamepad.js"></script>
-    <script type="text/javascript">
+    <script>
       CanvasGamepad.setup(
         {
           canvas:"controller",
@@ -352,6 +69,6 @@ function draw()
         }
       );
       multikey.setup(CanvasGamepad.events, "qwasbv", true);
-    </script>        
+    </script>
   </body>
 </html>
