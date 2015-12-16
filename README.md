@@ -185,7 +185,7 @@ CanvasGamepad.setup(
 );
 multikey.setup(CanvasGamepad.events, "qwasbv", true);
 ```
-the above code is running in [this example](https://github.com/32teeth/html5-plugin-canvas-gamepad/tree/master/example)
+the above code is running in [this example](http://32teeth.github.io/html5-plugin-canvas-gamepad/)
 
 ###CanvasGamepad observable method
 ---
