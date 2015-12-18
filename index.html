@@ -59,27 +59,96 @@ onDeviceReady: function() {
 <a id="configuration-options" class="anchor" href="#configuration-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration options</h2>
 
 <p><em>CanvasGamepad is fully customizable, from button names, colors, layout and more.</em></p>
+<table width="100%">
+<thead>
+<tr>
+<th style="text-align:right" width="15%">property</th>
+<th style="text-align:left">type</th>
+<th style="text-align:left">value(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">debug</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true|false</td>
+</tr>
+<tr>
+<td style="text-align:right">trace</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true|false</td>
+</tr>
+<tr>
+<td style="text-align:right">canvas</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">id of target canvas</td>
+</tr>
+<tr>
+<td style="text-align:right">buttons</td>
+<td style="text-align:left">array</td>
+<td style="text-align:left">[]</td>
+</tr>
+<tr>
+<td style="text-align:right">button</td>
+<td style="text-align:left">object</td>
+<td style="text-align:left">{name:string,color:hex|rgb|rgba}</td>
+</tr>
+<tr>
+<td style="text-align:right">layout</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT</td>
+</tr>
+<tr>
+<td style="text-align:right">start</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true|false</td>
+</tr>
+<tr>
+<td style="text-align:right">select</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true|false</td>
+</tr>
+<tr>
+<td style="text-align:right">joystick</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true|false</td>
+</tr>
+<tr>
+<td style="text-align:right">hidden</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true|false</td>
+</tr>
+</tbody>
+</table>
 
-<p>| property | type | value(s) | description | example |
-|-:|:-|:-|:-|:-|
-|debug|boolean|true|false|show or hide event debug info<br><em>default is false</em>|<code>debug:false</code>|
-|trace|boolean|true|false|show or hide gamepad trace info<br><em>default is false</em>|<code>trace:false</code>|
-|canvas|string|id of target canvas|<em>if left out, creates a new canvas object</em>|<code>canvas:"game"</code>|
-|buttons|array|[]|collection of button objects|<code>[{name:"x",color:"rgba(255,255,0,0.5)"}]</code>|
-|button|object|{name:string,color:hex|rgb|rgba}|properties for custom buttons|<code>[{name:"x",color:"rgba(255,255,0,0.5)"},{name:"y",color:"rgba(255,0,255,0.5)"}]</code>|
-|layout|string|TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT|cardinal position of buttons<br><em>default is *</em>BOTTOM_RIGHT**<em>|<code>layout:"BOTTOM_RIGHT"</code>|
-|start|boolean|true|false|display start button<br></em>default is true<em>|<code>start:false</code>|
-|select|boolean|true|false|display select button<br></em>default is false<em>|<code>select:false</code>|
-|joystick|boolean|true|false|display joystick/dpad<br></em>default is false<em>|<code>debug:false</code>|
-|hidden|boolean|true|false|show or hide the gamepad<br></em>default is false<em>|<br>this can be used to *hide</em> the gamepad if you are doing something else on screen|<code>hidden:false</code>|</p>
+<h4>if you are using <a href="http://multikey.32teeth.org/" target="_blank">multikey.js</a> to extend the CanvasGamepad for keyboard access</h4>
 
-<p><strong><em>if you are using <a href="http://multikey.32teeth.org/">multikey.js</a> to extend the CanvasGamepad for keyboard access</em></strong></p>
-
-<p>| property | type | value(s) | description | example |
-|-:|:-|:-|:-|:-|
-|buttons|array|[]|collection of button objects|<code>[{name:"x",color:"rgba(255,255,0,0.5)", key:"[keyboard letter]"}]</code>|
-|button|object|{name:string,color:hex|rgb|rgba}|properties for custom buttons|<code>[{name:"x",color:"rgba(255,255,0,0.5)", key:"w"},{name:"y",color:"rgba(255,0,255,0.5)", key:"q"}]</code>|
-|hint|boolean|true|false|show or hidekeyboard hint<br><em>default is false</em>|<code>hint:true</code>|</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right" width="15%">property</th>
+<th style="text-align:left">type</th>
+<th style="text-align:left">value(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">buttons</td>
+<td style="text-align:left">array</td>
+<td style="text-align:left">[]</td>
+</tr>
+<tr>
+<td style="text-align:right">button</td>
+<td style="text-align:left">object</td>
+<td style="text-align:left">{name:string,color:hex|rgb|rgba}</td>
+</tr>
+<tr>
+<td style="text-align:right">hint</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true|false</td>
+</tr>
+</tbody>
+</table>
 
 <h3>
 <a id="config-examples" class="anchor" href="#config-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config examples</h3>
