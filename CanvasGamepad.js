@@ -1,6 +1,6 @@
 /*
 ** @author Eugene Andruszczenko
-** @version 0.1.1
+** @version 0.1.2
 ** @date December 11th, 2015
 ** @description 
 ** CanvasGamepad.js

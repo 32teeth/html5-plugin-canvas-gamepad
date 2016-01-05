@@ -1,6 +1,6 @@
 {
   "name": "html5-plugin-canvas-gamepad",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "html5 Canvas Gamepad Plugin",
   "html5": {
     "id": "html5-plugin-canvas-gamepad",
@@ -22,6 +22,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/32teeth/html5-plugin-canvas-gamepad"
+  },
+  "homepage":{
+    "url":"http://32teeth.github.io/html5-plugin-canvas-gamepad/"
   },
   "keywords": [
     "html5",
