@@ -210,12 +210,12 @@ var game = (function(){
 		if(map["start"] == 1 && !banner)
 		{
 			banner = true;
-			ads.banner();
+			//ads.banner();
 		}
 		if(map["select"] == 1 && banner)
 		{
 			banner = false;
-			ads.destroy();
+			//ads.destroy();
 		}
 
 		var x = parseInt(map["x-dir"]);
