@@ -329,7 +329,16 @@ var CanvasGamepad = (function(){
 			switch(layout_string)
 			{
 				case "TOP_LEFT":
-					layout.x = 0 + button_offset.x;
+					var shift = 0;
+					for(var n = 0; n < buttons_layout.length; n++)
+					{
+						if(buttons_layout[n].r)
+						{
+							shift += buttons_layout[n].r;
+							buttons_layout[n].y -= buttons_layout[n].r*2;
+						}
+					}
+					layout.x = shift + button_offset.x;
 					layout.y = 0 + button_offset.y;
 				break;
 				case "TOP_RIGHT":
@@ -337,7 +346,15 @@ var CanvasGamepad = (function(){
 					layout.y = 0 + button_offset.y;				
 				break;
 				case "BOTTOM_LEFT":
-					layout.x = 0 + button_offset.x;
+					var shift = 0;
+					for(var n = 0; n < buttons_layout.length; n++)
+					{
+						if(buttons_layout[n].r)
+						{
+							shift += buttons_layout[n].r
+						}
+					}
+					layout.x = shift + button_offset.x;
 					layout.y = height - button_offset.y;
 				break;
 				case "BOTTOM_RIGHT":

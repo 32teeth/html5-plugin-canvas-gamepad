@@ -1,6 +1,6 @@
 {
   "name": "html5-plugin-canvas-gamepad",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "html5 Canvas Gamepad Plugin",
   "html5": {
     "id": "html5-plugin-canvas-gamepad",
