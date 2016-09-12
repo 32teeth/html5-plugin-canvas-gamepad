@@ -22,7 +22,6 @@ onDeviceReady: function() {
 
 *CanvasGamepad is fully customizable, from button names, colors, layout and more.*
 
-<<<<<<< HEAD
 | property | type    | value(s)                                 | description                              | example                                  |
 | -------: | :------ | :--------------------------------------- | :--------------------------------------- | :--------------------------------------- |
 |    debug | boolean | true\|false                              | show or hide event debug info<br>*default is false* | ```debug:false```                        |
