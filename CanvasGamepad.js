@@ -50,7 +50,7 @@ var CanvasGamepad = (function(){
 	*/
 	var touches = {};
 	var map = {};	
-
+	var observerFunction;
   /*
   ** @param toggle {boolean}
   */
@@ -233,6 +233,9 @@ var CanvasGamepad = (function(){
 							if(button.key){buttons_layout[n].key = button.key;};
 							buttons_layout_built = true;
 						}	
+					break;
+					case "observerFunction":
+						observerFunction = config[prop]
 					break;
 				}
 			}
@@ -540,6 +543,9 @@ var CanvasGamepad = (function(){
  							map[name] = 0;
  							delete touches[id].id	;
  						}
+ 						if (typeof observerFunction === "function"){
+							observerFunction();
+						}
  					} 											
 				}
 			},
@@ -637,6 +643,9 @@ var CanvasGamepad = (function(){
 					{
 						controller.stick.reset();
 						delete touches[id].id;
+					}
+					if (typeof observerFunction === "function"){
+						observerFunction();
 					}
 				}					
 			},
